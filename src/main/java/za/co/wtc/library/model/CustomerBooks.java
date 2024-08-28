@@ -19,6 +19,8 @@ public class CustomerBooks {
     @Column(name = "due_date")
     private LocalDateTime dueDate;
 
+    
+
     public CustomerBooks(){}
 
     public long getCustomerId() {

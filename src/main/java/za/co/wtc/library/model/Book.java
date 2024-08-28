@@ -17,21 +17,26 @@ public class Book {
     @Column(name = "ISBN")
     private String ISBN;
 
+    
+    @Column(name = "publisher")
+    private String publisher;
+    
+    @Column(name = "date_published")
+    private LocalDateTime datePublished;
+    
+    @Column(name = "category")
+    private String category;
+    
+    @Column(name = "date_created")
+    private LocalDateTime dateCreated;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private Author author;
 
-    @Column(name = "publisher")
-    private String publisher;
-
-    @Column(name = "date_published")
-    private LocalDateTime datePublished;
-
-    @Column(name = "category")
-    private String category;
-
-    @Column(name = "date_created")
-    private LocalDateTime dateCreated;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private CustomerBooks customerBooks;
 
     public Book(){}
 

@@ -38,6 +38,11 @@ public class Customer {
   @OneToMany(mappedBy = "customers",cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Address> adresses = new HashSet<>();
 
+  @OneToMany(mappedBy = "customers",cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<Book> customerBooks = new HashSet<>();
+
+  
+
   public Customer(){}
 
   public Customer(String name, String idNumber, String email) {
@@ -116,5 +121,13 @@ public class Customer {
 
   public void setAdresses(Set<Address> adresses) {
     this.adresses = adresses;
+  }
+
+  public Set<Book> getCustomerBooks() {
+    return customerBooks;
+  }
+
+  public void setCustomerBooks(Set<Book> customerBooks) {
+    this.customerBooks = customerBooks;
   }
 }
