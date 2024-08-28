@@ -2,6 +2,7 @@ package za.co.wtc.library.model;
 
 import java.time.LocalDateTime;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "author")
@@ -28,6 +29,11 @@ public class Author {
     
     @Column(name = "date_created")
     private LocalDateTime dateCreated;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Book> books;
+
+    
 
     public Author(){}
 
@@ -85,6 +91,14 @@ public class Author {
 
     public void setDateCreated(LocalDateTime date_created) {
         this.dateCreated = date_created;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 
 
