@@ -7,11 +7,13 @@ import javax.persistence.*;
 @Table(name = "customer_books")
 public class CustomerBooks {
 
-    @Column(name = "customer_id")
-    private long customerId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     @Column(name = "book_id")
-    private long bookId;
+    private Book book;
 
     @Column(name = "date_issued")
     private LocalDateTime dateIssued;
@@ -19,24 +21,24 @@ public class CustomerBooks {
     @Column(name = "due_date")
     private LocalDateTime dueDate;
 
-    
+
 
     public CustomerBooks(){}
 
-    public long getCustomerId() {
-        return customerId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(long customerId) {
-        this.customerId = customerId;
+    public void setCustomerId(Customer customer) {
+        this.customer = customer;
     }
 
-    public long getBookId() {
-        return bookId;
+    public Book getBookId() {
+        return book;
     }
 
-    public void setBookId(long bookId) {
-        this.bookId = bookId;
+    public void setBookId(Book book) {
+        this.book = book;
     }
 
     public LocalDateTime getDateIssued() {

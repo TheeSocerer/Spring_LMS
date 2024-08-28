@@ -4,6 +4,9 @@ package za.co.wtc.library.model;
 import java.time.LocalDateTime;
 import javax.persistence.*;
 
+import java.util.Set;
+import java.util.HashSet;
+
 @Entity
 @Table(name = "Book")
 public class Book {
@@ -18,8 +21,9 @@ public class Book {
     private String ISBN;
 
     
-    @Column(name = "publisher")
-    private String publisher;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "publisher", referencedColumnName = "id")
+    private Publisher publisher;
     
     @Column(name = "date_published")
     private LocalDateTime datePublished;
@@ -34,9 +38,9 @@ public class Book {
     @JoinColumn(name = "author_id")
     private Author author;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customers",cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "customer_id")
-    private CustomerBooks customerBooks;
+    private Set<CustomerBooks> customerBooks = new HashSet<>();
 
     public Book(){}
 
@@ -72,11 +76,11 @@ public class Book {
         this.author = author;
     }
 
-    public String getPublisher() {
+    public Publisher getPublisher() {
         return publisher;
     }
 
-    public void setPublisher(String publisher) {
+    public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
     }
 

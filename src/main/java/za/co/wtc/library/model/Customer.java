@@ -39,9 +39,7 @@ public class Customer {
   private Set<Address> adresses = new HashSet<>();
 
   @OneToMany(mappedBy = "customers",cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<Book> customerBooks = new HashSet<>();
-
-  
+  private Set<CustomerBooks> customerBooks = new HashSet<>();
 
   public Customer(){}
 
@@ -123,11 +121,11 @@ public class Customer {
     this.adresses = adresses;
   }
 
-  public Set<Book> getCustomerBooks() {
+  public Set<CustomerBooks> getCustomerBooks() {
     return customerBooks;
   }
 
-  public void setCustomerBooks(Set<Book> customerBooks) {
+  public void setCustomerBooks(Set<CustomerBooks> customerBooks) {
     this.customerBooks = customerBooks;
   }
 }

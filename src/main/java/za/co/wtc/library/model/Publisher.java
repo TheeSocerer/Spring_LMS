@@ -19,4 +19,7 @@ public class Publisher {
     @Column(name = "email")
     private String email;
 
+    @OneToOne( mappedBy = "book")
+    private Book book;
+
 }
