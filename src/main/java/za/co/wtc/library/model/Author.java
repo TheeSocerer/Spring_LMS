@@ -2,7 +2,8 @@ package za.co.wtc.library.model;
 
 import java.time.LocalDateTime;
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "author")
@@ -31,7 +32,7 @@ public class Author {
     private LocalDateTime dateCreated;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<Book> books;
+    private Set<Book> books = new HashSet<>();
 
     
 
@@ -93,11 +94,11 @@ public class Author {
         this.dateCreated = date_created;
     }
 
-    public List<Book> getBooks() {
+    public Set<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(List<Book> books) {
+    public void setBooks(Set<Book> books) {
         this.books = books;
     }
 

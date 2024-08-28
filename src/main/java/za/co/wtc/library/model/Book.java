@@ -18,8 +18,8 @@ public class Book {
     private String ISBN;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "author_id")
-    private long authorId;
+    @JoinColumn(name = "author_id")
+    private Author author;
 
     @Column(name = "publisher")
     private String publisher;
@@ -59,12 +59,12 @@ public class Book {
         ISBN = iSBN;
     }
 
-    public long getAuthorId() {
-        return authorId;
+    public Author getAuthorId() {
+        return author;
     }
 
-    public void setAuthorId(long authorId) {
-        this.authorId = authorId;
+    public void setAuthorId(Author author) {
+        this.author = author;
     }
 
     public String getPublisher() {

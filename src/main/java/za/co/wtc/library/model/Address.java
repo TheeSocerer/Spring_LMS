@@ -22,6 +22,13 @@ public class Address {
     @Column(name = "address_line_2")
     private String addressLine2;
 
+    @Column(name = "postal_code")
+    private Integer postalCode;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id")
+    private Customer customerId;
+
     public Address(){}
 
     public Long getId() {
@@ -72,19 +79,11 @@ public class Address {
         this.postalCode = postalCode;
     }
 
-    public long getCustomerId() {
+    public Customer getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(long customerId) {
+    public void setCustomerId(Customer customerId) {
         this.customerId = customerId;
     }
-
-    @Column(name = "postal_code")
-    private Integer postalCode;
-
-    @Column(name = "customer_id")
-    private long customerId;
-
-    
 }
