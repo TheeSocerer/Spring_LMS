@@ -85,7 +85,7 @@ public class CustomerServiceImpl implements CustomerService {
       existingCustomer.setMemberShipExpireDate(newCustomerDetails.getMemberShipExpireDate());
       return customerRepository.save(existingCustomer);
     }else{
-      throw new RuntimeException("Customer with ID number already exists");
+      throw new RuntimeException("Customer with ID number does not exists");
     }
   }
   

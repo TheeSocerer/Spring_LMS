@@ -18,13 +18,13 @@ public class CustomerController {
   @Autowired
   private CustomerService customerService;
 
-  @RequestMapping(method = RequestMethod.GET, value = "/email/{email}",produces = {"application/json"})
+  @RequestMapping(method = RequestMethod.GET, value = "email/{email}",produces = {"application/json"})
   public ResponseEntity<Customer> findByEmail(@PathVariable("email") String email) {
     Customer customer = customerService.findByEmail(email);
     return new ResponseEntity<>(customer, HttpStatus.OK);
   }
 
-  @RequestMapping(method = RequestMethod.GET, value = "/{idNumber}",produces = {"application/json"})
+  @RequestMapping(method = RequestMethod.GET, value = "id-number/{idNumber}",produces = {"application/json"})
   public ResponseEntity<Customer> findByIdNumber(@PathVariable("idNumber") String idNumber) {
     Customer customer = customerService.findByIdNumber(idNumber);
     return new ResponseEntity<>(customer, HttpStatus.OK);
@@ -38,7 +38,7 @@ public class CustomerController {
     }
 
     // Register a new customer (POST request)
-    @RequestMapping(method = RequestMethod.PUT, value = "/edit", produces = {"application/json"})
+    @RequestMapping(method = RequestMethod.PUT, produces = {"application/json"})
     public ResponseEntity<Customer> editCustomerDetails(@RequestBody Customer customer){
         Customer ediCustomer = customerService.editCustomerDetails(customer);
         return new ResponseEntity<>(ediCustomer, HttpStatus.OK);
