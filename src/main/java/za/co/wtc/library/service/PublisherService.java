@@ -4,4 +4,9 @@ import za.co.wtc.library.model.Publisher;
 
 public interface PublisherService {
     Publisher findByIdISNI(String ISNI);
+
+    Publisher registPublisher(Publisher publisher);
+
+
+    
 }

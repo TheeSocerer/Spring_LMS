@@ -10,13 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import za.co.wtc.library.model.Publisher;
 import za.co.wtc.library.service.PublisherService;
 
 @RestController
-@RequestMapping("/publisher")
+@RequestMapping("/publishers")
 public class PublisherController {
 
     @Autowired
     private PublisherService publisherService;
+
+    @RequestMapping(method = RequestMethod.POST, consumes = {"application/json"}, produces = {"application/json"})
+    public ResponseEntity<Publisher> registerCustomer(@RequestBody Publisher publisher){
+        Publisher registeredCustomer = publisherService.;
+        return new ResponseEntity<>(registeredCustomer, HttpStatus.CREATED);
+    }
     
 }
