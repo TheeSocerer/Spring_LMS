@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 @Entity
-@Table(name = "Book")
+@Table(name = "book")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,7 +38,7 @@ public class Book {
     @JoinColumn(name = "author_id")
     private Author author;
 
-    @OneToMany(mappedBy = "customers",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "book",cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "customer_id")
     private Set<CustomerBooks> customerBooks = new HashSet<>();
 

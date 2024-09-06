@@ -35,10 +35,10 @@ public class Customer {
   @Column(name = "membership_expire_date")
   private LocalDateTime memberShipExpireDate;
 
-  @OneToMany(mappedBy = "customers",cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<Address> adresses = new HashSet<>();
 
-  @OneToMany(mappedBy = "customers",cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<CustomerBooks> customerBooks = new HashSet<>();
 
   public Customer(){}

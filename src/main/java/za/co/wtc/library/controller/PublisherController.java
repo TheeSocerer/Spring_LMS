@@ -21,8 +21,8 @@ public class PublisherController {
     private PublisherService publisherService;
 
     @RequestMapping(method = RequestMethod.POST, consumes = {"application/json"}, produces = {"application/json"})
-    public ResponseEntity<Publisher> registerCustomer(@RequestBody Publisher publisher){
-        Publisher registeredCustomer = publisherService.;
+    public ResponseEntity<Publisher> registerPublisher(@RequestBody Publisher publisher){
+        Publisher registeredCustomer = publisherService.registPublisher(publisher);
         return new ResponseEntity<>(registeredCustomer, HttpStatus.CREATED);
     }
     
