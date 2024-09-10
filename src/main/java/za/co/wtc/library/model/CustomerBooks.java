@@ -7,12 +7,16 @@ import javax.persistence.*;
 @Table(name = "customer_books")
 public class CustomerBooks {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "book_id")
+    @JoinColumn(name = "book_id")
     private Book book;
 
     @Column(name = "date_issued")
@@ -23,19 +27,34 @@ public class CustomerBooks {
 
     public CustomerBooks(){}
 
+    public CustomerBooks(Customer customer, Book book, LocalDateTime dateIssued, LocalDateTime dueDate) {
+        this.customer = customer;
+        this.book = book;
+        this.dateIssued = dateIssued;
+        this.dueDate = dueDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomerId(Customer customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
-    public Book getBookId() {
+    public Book getBook() {
         return book;
     }
 
-    public void setBookId(Book book) {
+    public void setBook(Book book) {
         this.book = book;
     }
 

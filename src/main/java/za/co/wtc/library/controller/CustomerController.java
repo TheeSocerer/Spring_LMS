@@ -31,16 +31,16 @@ public class CustomerController {
   }
 
   // Register a new customer (POST request)
-    @RequestMapping(method = RequestMethod.POST, value = "/register", consumes = {"application/json"}, produces = {"application/json"})
+    @RequestMapping(method = RequestMethod.POST, value = "/add", consumes = {"application/json"}, produces = {"application/json"})
     public ResponseEntity<Customer> registerCustomer(@RequestBody Customer customer){
         Customer registeredCustomer = customerService.registerCustomer(customer);
         return new ResponseEntity<>(registeredCustomer, HttpStatus.CREATED);
     }
 
     // Register a new customer (POST request)
-    @RequestMapping(method = RequestMethod.PUT, produces = {"application/json"})
-    public ResponseEntity<Customer> editCustomerDetails(@RequestBody Customer customer){
-        Customer ediCustomer = customerService.editCustomerDetails(customer);
+    @RequestMapping(method = RequestMethod.PUT, value = "/edit/{id}" ,produces = {"application/json"})
+    public ResponseEntity<Customer> editCustomerDetails(@PathVariable("id") String id,@RequestBody Customer customer){
+        Customer ediCustomer = customerService.editCustomerDetails(id,customer);
         return new ResponseEntity<>(ediCustomer, HttpStatus.OK);
     }
 }

@@ -17,12 +17,11 @@ public class Book {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "ISBN")
-    private String ISBN;
+    @Column(name = "ISNI")
+    private String ISNI;
 
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "publisher", referencedColumnName = "id")
+    @OneToOne(mappedBy = "book",cascade = CascadeType.ALL)
     private Publisher publisher;
     
     @Column(name = "date_published")
@@ -39,7 +38,6 @@ public class Book {
     private Author author;
 
     @OneToMany(mappedBy = "book",cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "customer_id")
     private Set<CustomerBooks> customerBooks = new HashSet<>();
 
     public Book(){}
@@ -60,19 +58,19 @@ public class Book {
         this.title = title;
     }
 
-    public String getISBN() {
-        return ISBN;
+    public String getISNI() {
+        return ISNI;
     }
 
-    public void setISBN(String iSBN) {
-        ISBN = iSBN;
+    public void setISNI(String iSBN) {
+        ISNI = iSBN;
     }
 
-    public Author getAuthorId() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthorId(Author author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 

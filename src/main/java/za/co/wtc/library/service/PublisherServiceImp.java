@@ -43,7 +43,7 @@ public class PublisherServiceImp implements PublisherService{
     @Override
     public Publisher registPublisher(Publisher publisher) {
         // TODO Auto-generated method stub
-        Publisher existingPublisher = publisherRepository.findByISNI(publisher.getBook().getISBN());
+        Publisher existingPublisher = publisherRepository.findByISNI(publisher.getBook().getISNI());
         if( existingPublisher != null){
             throw new RuntimeException("Publisher with ISNI ISNI already exist");
         }

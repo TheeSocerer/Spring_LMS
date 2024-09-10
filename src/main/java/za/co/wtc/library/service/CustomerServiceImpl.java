@@ -6,6 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import za.co.wtc.library.dto.CustomerDto;
+import za.co.wtc.library.mapper.CustomerMapper;
 import za.co.wtc.library.model.Customer;
 import za.co.wtc.library.repository.CustomerRepository;
 
@@ -14,6 +17,9 @@ public class CustomerServiceImpl implements CustomerService {
 
   @Autowired
   private CustomerRepository customerRepository;
+
+  @Autowired
+  private final CustomerMapper customerMapper;
 
   private static final Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
@@ -72,8 +78,8 @@ public class CustomerServiceImpl implements CustomerService {
   }
 
   @Override
-  public Customer editCustomerDetails(Customer newCustomerDetails){
-    Customer existingCustomer = customerRepository.findByIdNumber(newCustomerDetails.getIdNumber());
+  public CustomerDto editCustomerDetails(String id, Customer newCustomerDetails){
+    Customer existingCustomer = customerRepository.findByIdNumber(id);
     if(existingCustomer != null){
       // Update customer details
       existingCustomer.setName(newCustomerDetails.getName());
@@ -83,7 +89,7 @@ public class CustomerServiceImpl implements CustomerService {
       existingCustomer.setEmail(newCustomerDetails.getEmail());
       existingCustomer.setMemberShipStartDate(newCustomerDetails.getMemberShipStartDate());
       existingCustomer.setMemberShipExpireDate(newCustomerDetails.getMemberShipExpireDate());
-      return customerRepository.save(existingCustomer);
+      return customerMapper.toDto(customerRepository.save(existingCustomer));
     }else{
       throw new RuntimeException("Customer with ID number does not exists");
     }

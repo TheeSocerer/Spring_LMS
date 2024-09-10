@@ -9,7 +9,6 @@ import za.co.wtc.library.model.Publisher;
 
 @Repository
 public interface PublisherRepository extends JpaRepository<Publisher, Long>{
-    @Query("select c from publisher c "
-    + "where c.ISNI = :ISNI")
+    @Query("select c.publisher from Book c where c.ISNI = :ISNI")
     Publisher findByISNI(String ISNI);
 }

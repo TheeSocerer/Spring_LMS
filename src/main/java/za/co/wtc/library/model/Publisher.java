@@ -21,7 +21,8 @@ public class Publisher {
     @Column(name = "email")
     private String email;
 
-    @OneToOne( mappedBy = "book")
+    @OneToOne
+    @JoinColumn(name = "book_id")
     private Book book;
 
     public Publisher(){}
