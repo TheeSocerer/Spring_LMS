@@ -1,106 +1,98 @@
 package za.co.wtc.library.model;
 
 import java.time.LocalDateTime;
-import javax.persistence.*;
-import java.util.Set;
-import java.util.HashSet;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "author")
 public class Author {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
 
-    @Column(name = "name")
-    private String name;
-  
-    @Column(name = "surname")
-    private String surname;
+  @Column(name = "name")
+  private String name;
 
-    @Column(name = "title")
-    private String title;
+  @Column(name = "surname")
+  private String surname;
 
-    @Column(name = "email")
-    private String email;
+  @Column(name = "title")
+  private String title;
 
-    @Column(name = "rating")
-    private Integer rating;
-    
-    @Column(name = "date_created")
-    private LocalDateTime dateCreated;
+  @Column(name = "email")
+  private String email;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL,orphanRemoval = true)
-    private Set<Book> books = new HashSet<>();
+  @Column(name = "rating")
+  private Integer rating;
 
-    
+  @Column(name = "date_created")
+  private LocalDateTime dateCreated;
 
-    public Author(){}
 
-    public Long getId() {
-        return id;
-    }
+  public Author() {
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public String getSurname() {
-        return surname;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
+  public String getSurname() {
+    return surname;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public void setSurname(String surname) {
+    this.surname = surname;
+  }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public Integer getRating() {
-        return rating;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    public void setRating(Integer rating) {
-        this.rating = rating;
-    }
+  public Integer getRating() {
+    return rating;
+  }
 
-    public LocalDateTime getDateCreated() {
-        return this.dateCreated;
-    }
+  public void setRating(Integer rating) {
+    this.rating = rating;
+  }
 
-    public void setDateCreated(LocalDateTime date_created) {
-        this.dateCreated = date_created;
-    }
+  public LocalDateTime getDateCreated() {
+    return this.dateCreated;
+  }
 
-    public Set<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(Set<Book> books) {
-        this.books = books;
-    }
+  public void setDateCreated(LocalDateTime date_created) {
+    this.dateCreated = date_created;
+  }
 
 
 }

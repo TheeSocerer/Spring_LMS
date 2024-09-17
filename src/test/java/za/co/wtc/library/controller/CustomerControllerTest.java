@@ -1,6 +1,9 @@
 package za.co.wtc.library.controller;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +13,14 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import za.co.wtc.library.dto.CustomerDto;
 import za.co.wtc.library.exception.LibraryExceptionHandler;
-import za.co.wtc.library.model.Customer;
 import za.co.wtc.library.service.CustomerService;
 
 @WebMvcTest(CustomerController.class)
 @ContextConfiguration(classes = {CustomerController.class, LibraryExceptionHandler.class})
 class CustomerControllerTest {
+
 
   @MockBean
   private CustomerService customerService;
@@ -24,13 +28,16 @@ class CustomerControllerTest {
   @Autowired
   private MockMvc mockMvc;
 
+  @Autowired
+  private ObjectMapper objectMapper;
+
   @Test
   public void testFindByIdNumberSuccess() throws Exception {
 
     Mockito.when(customerService.findByIdNumber(Mockito.anyString()))
-            .thenReturn(new Customer());
+        .thenReturn(new CustomerDto());
 
-    mockMvc.perform(MockMvcRequestBuilders.get("/customers/10000")
+    mockMvc.perform(MockMvcRequestBuilders.get("/customers/id-number/10000")
             .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk());
 
@@ -42,9 +49,28 @@ class CustomerControllerTest {
     Mockito.when(customerService.findByIdNumber(Mockito.anyString()))
         .thenThrow(RuntimeException.class);
 
-    mockMvc.perform(MockMvcRequestBuilders.get("/customers/10000")
+    mockMvc.perform(MockMvcRequestBuilders.get("/customers/id-number/10000")
             .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isInternalServerError());
 
   }
+
+  // todo add find by email tests
+
+  @Test
+  public void testRegisterCustomer() throws Exception {
+
+    Mockito.when(customerService.registerCustomer(Mockito.any(CustomerDto.class)))
+        .thenReturn(new CustomerDto());
+
+    String json = objectMapper.writeValueAsString(new CustomerDto());
+
+    mockMvc.perform(MockMvcRequestBuilders.post("/customers/add")
+            .content(json)
+            .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isCreated());
+
+  }
+
+  // todo testRegisterCustomer error testing
 }

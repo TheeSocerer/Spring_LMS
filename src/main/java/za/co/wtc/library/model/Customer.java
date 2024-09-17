@@ -1,10 +1,17 @@
 package za.co.wtc.library.model;
 
 import java.time.LocalDateTime;
-import javax.persistence.*;
-
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "customers")
@@ -35,18 +42,10 @@ public class Customer {
   @Column(name = "membership_expire_date")
   private LocalDateTime memberShipExpireDate;
 
-  @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<Address> adresses = new HashSet<>();
+  @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+  private Set<Address> addresses = new HashSet<>();
 
-  @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL, orphanRemoval = true)
-  private Set<CustomerBooks> customerBooks = new HashSet<>();
-
-  public Customer(){}
-
-  public Customer(String name, String idNumber, String email) {
-    this.name = name;
-    this.idNumber = idNumber;
-    this.email = email;
+  public Customer() {
   }
 
   public Long getId() {
@@ -113,19 +112,11 @@ public class Customer {
     this.memberShipExpireDate = memberShipExpireDate;
   }
 
-  public Set<Address> getAdresses() {
-    return adresses;
+  public Set<Address> getAddresses() {
+    return addresses;
   }
 
-  public void setAdresses(Set<Address> adresses) {
-    this.adresses = adresses;
-  }
-
-  public Set<CustomerBooks> getCustomerBooks() {
-    return customerBooks;
-  }
-
-  public void setCustomerBooks(Set<CustomerBooks> customerBooks) {
-    this.customerBooks = customerBooks;
+  public void setAddresses(Set<Address> addresses) {
+    this.addresses = addresses;
   }
 }

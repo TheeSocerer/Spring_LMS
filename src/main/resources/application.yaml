@@ -1,12 +1,27 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:library
+    url: jdbc:h2:mem:library;DB_CLOSE_DELAY=-1
     username: sa
     password: password
     driverClassName: org.h2.Driver
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     defer-datasource-initialization: true
+    properties:
+      show-sql: true
+      hibernate:
+        format_sql: true
+
   h2:
     console:
       enabled: true
+
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG  #show sql values
+        type:
+          descriptor:
+            sql: trace

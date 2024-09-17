@@ -9,7 +9,7 @@ public interface CustomerService {
 
   Customer findByEmail(String email);
 
-  Customer registerCustomer(Customer customer);
+  CustomerDto registerCustomer(CustomerDto customerDto);
 
-  CustomerDto editCustomerDetails(String idNumber,Customer customer);
+  CustomerDto editCustomerDetails(CustomerDto customerDto);
 }
