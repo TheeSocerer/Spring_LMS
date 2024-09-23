@@ -40,12 +40,12 @@ public class CustomerController {
     return new ResponseEntity<>(registeredCustomer, HttpStatus.CREATED);
   }
 
-   // todo implement this method correctly.
-//  // Register a new customer (POST request)
-//  @RequestMapping(method = RequestMethod.PUT, value = "/edit/{id}", produces = {"application/json"})
-//  public ResponseEntity<CustomerDto> editCustomerDetails(@PathVariable("id") String id,
-//      @RequestBody Customer customer) {
-//    CustomerDto ediCustomer = customerService.editCustomerDetails(id, customer);
-//    return new ResponseEntity<>(ediCustomer, HttpStatus.OK);
-//  }
+   // TODO: implement this method correctly.
+ // Register a new customer (POST request)
+ @RequestMapping(method = RequestMethod.POST, value = "/edit/{id}", produces = {"application/json"})
+ public ResponseEntity<CustomerDto> editCustomerDetails(@PathVariable("id") String id,
+     @RequestBody CustomerDto customer) {
+   CustomerDto editedCustomer = customerService.editCustomerDetails(customer);
+   return new ResponseEntity<>(editedCustomer, HttpStatus.OK);
+ }
 }

@@ -98,4 +98,14 @@ class CustomerMapperTest {
   }
 
   // todo add null test customerMapper.toDto(null)
+  @Test
+  public void  toDtoNull(){
+    //Given 
+    Customer customer = null;
+
+    // When
+    CustomerDto customerDto = customerMapper.toDto(customer);
+
+    assertNull(customerDto);
+  }
 }
