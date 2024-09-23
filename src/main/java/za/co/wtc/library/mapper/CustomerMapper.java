@@ -30,7 +30,7 @@ public class CustomerMapper {
           addressDto.setId(address.getId());
           addressDto.setAddress1(address.getAddressLine1());
           addressDto.setAddress2(address.getAddressLine2());
-         // addressDto.setPostalCode(address.getPostalCode()); todo strange stuff fix the bug
+         // addressDto.setPostalCode(address.getPostalCode()); TODO: strange stuff fix the bug
           return addressDto;
         }).collect(Collectors.toSet());
 
