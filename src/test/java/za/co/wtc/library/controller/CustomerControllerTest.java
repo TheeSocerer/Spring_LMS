@@ -56,7 +56,30 @@ class CustomerControllerTest {
   }
 
   // todo add find by email tests
-  
+  // why are adding the throws exception
+  @Test
+  public void testFindByEmaillSuccess() throws Exception{
+
+    Mockito.when(customerService.findByEmail(Mockito.anyString()))
+        .thenReturn(new CustomerDto());
+
+    mockMvc.perform(MockMvcRequestBuilders.get("/customers/email/tshepo@gmail.com")
+    .contentType(MediaType.APPLICATION_JSON))
+.andExpect(status().isOk());
+
+  }
+
+  @Test
+  public void testFindEmailError() throws Exception {
+
+    Mockito.when(customerService.findByEmail(Mockito.anyString()))
+        .thenThrow(RuntimeException.class);
+
+    mockMvc.perform(MockMvcRequestBuilders.get("/customers/email/tshepo@gmail.com")
+            .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isInternalServerError());
+
+  }
 
   @Test
   public void testRegisterCustomer() throws Exception {
@@ -74,4 +97,18 @@ class CustomerControllerTest {
   }
 
   // todo testRegisterCustomer error testing
+  @Test
+  public void testRegisterCustomerError() throws Exception {
+
+    Mockito.when(customerService.registerCustomer(Mockito.any(CustomerDto.class)))
+        .thenThrow(RuntimeException.class);
+
+    String json = objectMapper.writeValueAsString(new CustomerDto());
+
+    mockMvc.perform(MockMvcRequestBuilders.post("/customers/add")
+            .content(json)
+            .contentType(MediaType.APPLICATION_JSON))
+        .andExpect(status().isInternalServerError());
+
+  }
 }
