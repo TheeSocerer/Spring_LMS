@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import za.co.wtc.library.dto.CustomerDto;
-import za.co.wtc.library.model.Customer;
 import za.co.wtc.library.service.CustomerService;
 
 @RestController
@@ -21,9 +20,9 @@ public class CustomerController {
 
   @RequestMapping(method = RequestMethod.GET, value = "email/{email}", produces = {
       "application/json"})
-  public ResponseEntity<Customer> findByEmail(@PathVariable("email") String email) {
-    Customer customer = customerService.findByEmail(email);
-    return new ResponseEntity<>(customer, HttpStatus.OK);
+  public ResponseEntity<CustomerDto> findByEmail(@PathVariable("email") String email) {
+    CustomerDto customerDto = customerService.findByEmail(email);
+    return new ResponseEntity<>(customerDto, HttpStatus.OK);
   }
 
   @RequestMapping(method = RequestMethod.GET, value = "id-number/{idNumber}", produces = {

@@ -56,6 +56,7 @@ class CustomerControllerTest {
   }
 
   // todo add find by email tests
+  
 
   @Test
   public void testRegisterCustomer() throws Exception {

@@ -39,9 +39,23 @@ public class CustomerServiceImpl implements CustomerService {
   }
 
   @Override
-  public Customer findByEmail(String email) {
+  public CustomerDto findByEmail(String email) {
     // todo complete method and add unit tests
-    return null;
+    logger.info("search for customers with eamil {}",email);
+    try {
+      Customer customer = customerRepository.findByEmail(email);
+      if( customer != null){
+        logger.info("Found customer with email {} details {}",email, customer);
+      }
+      return customerMapper.toDto(customer);
+      
+    } catch (Exception e) {
+      // TODO: handle exception
+      String message = "Error while searching for customer with email " + email
+          + e.getMessage();
+      logger.error(message, e);
+      throw new RuntimeException(message, e);
+    }
   }
 
   @Override
