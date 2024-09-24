@@ -58,7 +58,7 @@ public class CustomerMapper {
             address.setId(address.getId());
             address.setAddressLine1(addressDTO.getAddress1());
             address.setAddressLine2(addressDTO.getAddress2());
-            address.setPostalCode(address.getPostalCode());
+            address.setPostalCode(addressDTO.getPostalCode());
             address.setCustomer(customer);
             return address;
           }).collect(Collectors.toSet());

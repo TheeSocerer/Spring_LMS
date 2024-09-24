@@ -62,6 +62,7 @@ class CustomerServiceImplTest {
 
     customerDto.setAddressDTOS(addressDTOS);
 
+
     CustomerDto customerDto1 = customerService.registerCustomer(customerDto);
 
     assertNotNull(customerDto1);
@@ -81,10 +82,12 @@ class CustomerServiceImplTest {
     // todo do some asserts here
     AddressDTO addressDto2 = customerDto1.getAddressDTOS().stream().findFirst().orElse(null);
 
-    assertEquals(addressDto.getAddress1(), addressDto2.getAddress1());
+      assert addressDto2 != null;
+      assertEquals(addressDto.getAddress1(), addressDto2.getAddress1());
     assertEquals(addressDto.getAddress2(), addressDto2.getAddress2());
-    // assertEquals(addressDto.getId(), addressDto2.getId());
-    assertEquals(addressDto.getPostalCode(), addressDto2.getPostalCode());
+
+    // data was being lost here in the address mapper
+    assertEquals(addressDto.getPostalCode(),addressDto2.getPostalCode());
 
     
 
