@@ -121,6 +121,7 @@ class CustomerServiceImplTest {
     assertThrows(RuntimeException.class, () -> customerService.registerCustomer(customerDto));
   }
 
+
   // todo add editCustomerDetails test method or methods
   @Test
   public void testEditCustomerDetailsSuccess(){
