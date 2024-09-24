@@ -31,7 +31,11 @@ class CustomerServiceImplTest {
     CustomerDto customerDto = customerService.findByIdNumber("1234567890");
     assertNotNull(customerDto);
     assertEquals("John", customerDto.getName());
-    // assert other fields
+    //TODO: assert other fields
+    assertEquals("Doe", customerDto.getSurname());
+    assertEquals("john.doe@example.com", customerDto.getEmail());
+
+    assertEquals("2023-01-01T10:00", customerDto.getMemberShipStartDate().toString());
   }
 
   @Test
@@ -118,6 +122,34 @@ class CustomerServiceImplTest {
   }
 
   // todo add editCustomerDetails test method or methods
+  @Test
+  public void testEditCustomerDetailsSuccess(){
+    CustomerDto customerDto = new CustomerDto();
+    customerDto.setName("Tshepo");
+    customerDto.setSurname("Shiburi");
+    customerDto.setTitle("Mr.");
+    customerDto.setIdNumber("1122334455");
+    customerDto.setEmail("Tshepo@example.com");
+    // customerDto.setMemberShipStartDate(LocalDateTime.of(2023, 1, 1, 10, 0));
+    // customerDto.setMemberShipExpireDate(LocalDateTime.of(2024, 1, 1, 10, 0));
+
+    AddressDTO addressDto = new AddressDTO();
+    addressDto.setId(1L);
+    addressDto.setAddress1("123 Main St");
+    addressDto.setAddress2("Apt 4B");
+    addressDto.setPostalCode(123457);
+
+    Set<AddressDTO> addressDTOS = new HashSet<>();
+    addressDTOS.add(addressDto);
+
+    customerDto.setAddressDTOS(addressDTOS);
+
+
+    CustomerDto customerDto1 = customerService.editCustomerDetails(customerDto);
+    assertNotNull(customerDto1);
+    assertEquals("Tshepo", customerDto1.getName());
+
+  }
 
 
 
