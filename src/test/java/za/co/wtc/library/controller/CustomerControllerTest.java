@@ -56,7 +56,7 @@ class CustomerControllerTest {
   }
 
   // todo add find by email tests
-  // why are adding the throws exception
+  // why are we adding the throws exception
   @Test
   public void testFindByEmaillSuccess() throws Exception{
 
