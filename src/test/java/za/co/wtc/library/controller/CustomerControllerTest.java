@@ -109,6 +109,34 @@ class CustomerControllerTest {
             .content(json)
             .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isInternalServerError());
+  }
 
+  //TODO:
+  @Test
+  public void testEditCustomerSuccess() throws Exception{
+
+    Mockito.when(customerService.editCustomerDetails(Mockito.any(CustomerDto.class)))
+            .thenReturn(new CustomerDto());
+
+    String json = objectMapper.writeValueAsString(new CustomerDto());
+
+    mockMvc.perform(MockMvcRequestBuilders.post("/customers/edit/1234567890")
+            .content(json)
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk());
+  }
+
+  @Test
+  public void testEditCustomerError() throws Exception{
+
+    Mockito.when(customerService.editCustomerDetails(Mockito.any(CustomerDto.class)))
+            .thenThrow(RuntimeException.class);
+
+    String json = objectMapper.writeValueAsString(new CustomerDto());
+
+    mockMvc.perform(MockMvcRequestBuilders.post("/customers/edit/1234567890")
+                    .content(json)
+                    .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isInternalServerError());
   }
 }
