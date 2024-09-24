@@ -120,7 +120,7 @@ class CustomerControllerTest {
 
     String json = objectMapper.writeValueAsString(new CustomerDto());
 
-    mockMvc.perform(MockMvcRequestBuilders.post("/customers/edit/1234567890")
+    mockMvc.perform(MockMvcRequestBuilders.post("/customers/edit")
             .content(json)
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk());
@@ -134,7 +134,7 @@ class CustomerControllerTest {
 
     String json = objectMapper.writeValueAsString(new CustomerDto());
 
-    mockMvc.perform(MockMvcRequestBuilders.post("/customers/edit/1234567890")
+    mockMvc.perform(MockMvcRequestBuilders.post("/customers/edit")
                     .content(json)
                     .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isInternalServerError());

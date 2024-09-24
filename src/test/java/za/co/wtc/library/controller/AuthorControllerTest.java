@@ -18,7 +18,6 @@ import za.co.wtc.library.dto.AuthorDTO;
 import za.co.wtc.library.dto.CustomerDto;
 import za.co.wtc.library.exception.LibraryExceptionHandler;
 import za.co.wtc.library.service.AuthorService;
-import za.co.wtc.library.service.CustomerService;
 
 @WebMvcTest(AuthorController.class)
 @ContextConfiguration(classes = {AuthorController.class, LibraryExceptionHandler.class})
@@ -51,6 +50,62 @@ public class AuthorControllerTest {
 
         mockMvc.perform(MockMvcRequestBuilders.get("/author/email/tshepo@example.com")
                 .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError());
+    }
+
+    @Test
+    public void testRegisterAuthorSuccess() throws Exception {
+
+        Mockito.when(authorService.registerAuthor(Mockito.any(AuthorDTO.class)))
+                .thenReturn(new AuthorDTO());
+
+        String json = objectMapper.writeValueAsString(new AuthorDTO());
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/author/add")
+                        .content(json)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+
+    }
+
+    @Test
+    public void testRegisterCustomerError() throws Exception {
+
+        Mockito.when(authorService.registerAuthor(Mockito.any(AuthorDTO.class)))
+                .thenThrow(RuntimeException.class);
+
+        String json = objectMapper.writeValueAsString(new AuthorDTO());
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/author/add")
+                        .content(json).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError());
+    }
+
+    @Test
+    public void testEditAuthorSuccess() throws Exception{
+
+        Mockito.when(authorService.editAuthor(Mockito.any(AuthorDTO.class)))
+                .thenReturn(new AuthorDTO());
+
+        String json = objectMapper.writeValueAsString(new AuthorDTO());
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/author/edit")
+                        .content(json)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testEditAuthorError() throws Exception{
+
+        Mockito.when(authorService.editAuthor(Mockito.any(AuthorDTO.class)))
+                .thenThrow(RuntimeException.class);
+
+        String json = objectMapper.writeValueAsString(new AuthorDTO());
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/author/edit")
+                        .content(json)
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
     }
 }

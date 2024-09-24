@@ -38,6 +38,10 @@ public class AuthorController {
         return new ResponseEntity<>(reigistereAuthorDTO, HttpStatus.CREATED);
     }
 
-
-    
+    @RequestMapping(method = RequestMethod.POST, value = "/edit", produces = {"application/json"})
+    public ResponseEntity<AuthorDTO> editAuthorDetails(@RequestBody AuthorDTO authorDTO) {
+        AuthorDTO editedAuthor = authorService.editAuthor(authorDTO);
+        return new ResponseEntity<>(editedAuthor, HttpStatus.OK);
+    }
 }
+

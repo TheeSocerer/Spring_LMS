@@ -42,9 +42,8 @@ public class CustomerController {
 
    // TODO: implement this method correctly.
  // Register a new customer (POST request)
- @RequestMapping(method = RequestMethod.POST, value = "/edit/{id}", produces = {"application/json"})
- public ResponseEntity<CustomerDto> editCustomerDetails(@PathVariable("id") String id,
-     @RequestBody CustomerDto customer) {
+ @RequestMapping(method = RequestMethod.POST, value = "/edit", produces = {"application/json"})
+ public ResponseEntity<CustomerDto> editCustomerDetails(@RequestBody CustomerDto customer) {
    CustomerDto editedCustomer = customerService.editCustomerDetails(customer);
    return new ResponseEntity<>(editedCustomer, HttpStatus.OK);
  }
