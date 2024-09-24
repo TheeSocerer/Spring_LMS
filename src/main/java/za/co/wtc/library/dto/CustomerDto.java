@@ -1,7 +1,6 @@
 package za.co.wtc.library.dto;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 
 public class CustomerDto {
@@ -13,7 +12,7 @@ public class CustomerDto {
   private String email;
   private LocalDateTime memberShipStartDate;
   private LocalDateTime memberShipExpireDate;
-  private Set<AddressDTO> addressDTOS = new HashSet<>();
+  private Set<AddressDTO> addressDTOS;
 
   public Long getId() {
     return id;

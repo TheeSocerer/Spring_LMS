@@ -3,6 +3,7 @@ package za.co.wtc.library.service;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
@@ -47,8 +48,8 @@ class CustomerServiceImplTest {
     customerDto.setTitle("Mr.");
     customerDto.setIdNumber("7888665333");
     customerDto.setEmail("john@example.com");
-    customerDto.setMemberShipStartDate(LocalDateTime.of(2023, 1, 1, 10, 0));
-    customerDto.setMemberShipExpireDate(LocalDateTime.of(2024, 1, 1, 10, 0));
+    // customerDto.setMemberShipStartDate(LocalDateTime.of(2023, 1, 1, 10, 0));
+    // customerDto.setMemberShipExpireDate(LocalDateTime.of(2024, 1, 1, 10, 0));
 
     AddressDTO addressDto = new AddressDTO();
     addressDto.setId(1L);
@@ -58,6 +59,7 @@ class CustomerServiceImplTest {
 
     Set<AddressDTO> addressDTOS = new HashSet<>();
     addressDTOS.add(addressDto);
+
     customerDto.setAddressDTOS(addressDTOS);
 
     CustomerDto customerDto1 = customerService.registerCustomer(customerDto);
@@ -67,13 +69,24 @@ class CustomerServiceImplTest {
     assertEquals(customerDto.getName(), customerDto1.getName());
     assertEquals(customerDto.getSurname(), customerDto1.getSurname());
     assertEquals(customerDto.getTitle(), customerDto1.getTitle());
-    // todo find way of testing this
-//    assertEquals(customerDto.getMemberShipStartDate(), customer.getMemberShipStartDate());
-//    assertEquals(customerDto.getMemberShipExpireDate(), customer.getMemberShipExpireDate());
+
+    // TODO: find way of testing this
+   assertEquals(customerDto.getMemberShipStartDate().truncatedTo(ChronoUnit.MINUTES),
+                LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES));
+   assertEquals(customerDto.getMemberShipExpireDate().truncatedTo(ChronoUnit.MINUTES), 
+                LocalDateTime.now().plusYears(1).truncatedTo(ChronoUnit.MINUTES));
+
     assertEquals(customerDto.getEmail(), customerDto1.getEmail());
     assertEquals(1, customerDto1.getAddressDTOS().size());
     // todo do some asserts here
-    AddressDTO addressDTO = customerDto1.getAddressDTOS().stream().findFirst().orElse(null);
+    AddressDTO addressDto2 = customerDto1.getAddressDTOS().stream().findFirst().orElse(null);
+
+    assertEquals(addressDto.getAddress1(), addressDto2.getAddress1());
+    assertEquals(addressDto.getAddress2(), addressDto2.getAddress2());
+    // assertEquals(addressDto.getId(), addressDto2.getId());
+    assertEquals(addressDto.getPostalCode(), addressDto2.getPostalCode());
+
+    
 
 
   }
@@ -91,7 +104,18 @@ class CustomerServiceImplTest {
   }
 
   // todo test by duplicate email address
+  @Test
+  public void testRegisterCustomerAlreadyExistByEmail() {
+    CustomerDto customerDto = new CustomerDto();
+    customerDto.setName("John");
+    customerDto.setSurname("Doe");
+    customerDto.setTitle("Mr.");
+    customerDto.setEmail("alice.johnson@example.com");
+    assertThrows(RuntimeException.class, () -> customerService.registerCustomer(customerDto));
+  }
 
   // todo add editCustomerDetails test method or methods
+
+
 
 }

@@ -6,7 +6,7 @@ public class AddressDTO {
   private String address1;
   private String address2;
   private String province;
-  private int postalCode;
+  private Integer postalCode;
 
   public Long getId() {
     return id;
@@ -40,11 +40,11 @@ public class AddressDTO {
     this.province = province;
   }
 
-  public int getPostalCode() {
+  public Integer getPostalCode() {
     return postalCode;
   }
 
-  public void setPostalCode(int postalCode) {
+  public void setPostalCode(Integer postalCode) {
     this.postalCode = postalCode;
   }
 }
